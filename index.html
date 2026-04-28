@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Graphics - Premium Internet Cafe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --accent: #14b8a6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(31, 41, 55, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* Services Grid */
+        .services {
+            background: var(--light);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Booking Section */
+        .booking {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            background: white;
+        }
+
+        .price-display {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Features Section */
+        .features {
+            background: var(--dark);
+            color: white;
+        }
+
+        .feature {
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            background: rgba(20, 184, 166, 0.1);
+            padding-left: 2.5rem;
+        }
+
+        .feature h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--light);
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+
+        .pricing-list {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .pricing-list li:before {
+            content: "✓ ";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* AI Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chat-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-window.active {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: #f9fafb;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            word-wrap: break-word;
+            line-height: 1.4;
+        }
+
+        .message.bot .message-content {
+            background: var(--primary);
+            color: white;
+        }
+
+        .message.user .message-content {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 25px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .chat-send {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send:hover {
+            background: var(--secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .chat-window {
+                width: 300px;
+                height: 450px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">🖥️ Calculus Graphics</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#booking">Book Now</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Welcome to Calculus Graphics</h1>
+            <p>Your Premium Internet Cafe Experience</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})">Book Now</button>
+                <button class="btn btn-secondary" onclick="toggleChat()">💬 Chat with AI</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Premium Services</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">🎮</div>
+                    <h3>Gaming Station</h3>
+                    <p>High-performance gaming PCs with RTX graphics cards and ultra-fast internet.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Workstations</h3>
+                    <p>Professional workstations for design, editing, and development.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">☕</div>
+                    <h3>Cafe Lounge</h3>
+                    <p>Comfortable lounge with complimentary beverages and snacks.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎵</div>
+                    <h3>Streaming Studio</h3>
+                    <p>Professional streaming setup with 4K cameras and audio.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>Secure Network</h3>
+                    <p>Bank-level security with VPN and encryption.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Training Programs</h3>
+                    <p>Expert-led courses in coding, design, and digital marketing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Why Choose Calculus Graphics?</h2>
+            <div class="grid">
+                <div class="feature">
+                    <h4>⚡ Lightning Fast</h4>
+                    <p>1Gbps fiber optic connection ensuring zero lag.</p>
+                </div>
+                <div class="feature">
+                    <h4>🌐 24/7 Availability</h4>
+                    <p>Round-the-clock operations with support staff.</p>
+                </div>
+                <div class="feature">
+                    <h4>🏆 Premium Hardware</h4>
+                    <p>Latest generation processors and GPUs.</p>
+                </div>
+                <div class="feature">
+                    <h4>🎯 Community Driven</h4>
+                    <p>Join a thriving community of gamers and developers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Book Your Station Now</h2>
+            <form class="booking-form" onsubmit="handleBooking(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="date">Booking Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <input type="time" id="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="station">Select Station Type</label>
+                    <select id="station" required onchange="updatePrice()">
+                        <option value="">Choose a station...</option>
+                        <option value="gaming" data-price="2.50">Gaming PC - $2.50/hour</option>
+                        <option value="workstation" data-price="3.00">Workstation - $3.00/hour</option>
+                        <option value="streaming" data-price="8.00">Streaming Studio - $8.00/hour</option>
+                        <option value="group" data-price="12.00">Group Room - $12.00/hour</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration (Hours)</label>
+                    <input type="number" id="duration" required min="1" max="12" placeholder="1" onchange="updatePrice()">
+                </div>
+                <div class="price-display">
+                    Total Price: <strong id="totalPrice">$0.00</strong>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; color: var(--primary);">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Flexible Pricing Plans</h2>
+            <div class="grid">
+                <div class="pricing-card">
+                    <h3>Casual Gamer</h3>
+                    <div class="price">$2.50<span style="font-size: 1rem;">/hour</span></div>
+                    <ul class="pricing-list">
+                        <li>Gaming PC Access</li>
+                        <li>High-speed Internet</li>
+                        <li>Free Beverages</li>
+                        <li>Public WiFi</li>
+                        <li>Monthly Leaderboard</li>
+                    </ul>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Pro Developer</h3>
+                    <div class="price">$4.00<span style="font-size: 1rem;">/hour</span></div>
+                    <ul class="pricing-list">
+                        <li>Professional Workstation</li>
+                        <li>All Software Included</li>
+                        <li>Priority Support</li>
+                        <li>Private Booth</li>
+                        <li>Backup Storage</li>
+                    </ul>
+                    <button class="btn btn-primary">Upgrade Now</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Content Creator</h3>
+                    <div class="price">$8.00<span style="font-size: 1rem;">/hour</span></div>
+                    <ul class="pricing-list">
+                        <li>Streaming Studio</li>
+                        <li>4K Equipment</li>
+                        <li>Green Screen</li>
+                        <li>Premium Audio</li>
+                        <li>Exclusive Editing</li>
+                    </ul>
+                    <button class="btn btn-primary">Become Creator</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>📍 Zoo Road, kano State</p>
+                    <p>📞 07045809909</p>
+                    <p>✉️ imranabdulrahman1001@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#home" style="color: #fff;">Home</a></p>
+                    <p><a href="#services" style="color: #fff;">Services</a></p>
+                    <p><a href="#pricing" style="color: #fff;">Pricing</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <p>🐦 Twitter | 📘 Facebook | 📸 Instagram</p>
+                    <p>🎥 YouTube | 💼 LinkedIn</p>
+                </div>
+            </div>
+            <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0;">
+            <p>&copy; 2026 Calculus Graphics/ Built By Imran Abdulrahman. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <button class="chat-toggle" onclick="toggleChat()">💬</button>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                🤖 Calculus AI Assistant
+                <button class="chat-close" onclick="toggleChat()">✕</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">Hi! I'm Calculus AI. How can I help you today? 🚀</div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                <button class="chat-send" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AI Chatbot Responses
+        const aiResponses = {
+            "hello|hi|hey": "Hello! 👋 Welcome to Calculus Graphics! How can I help you today?",
+            "price|pricing|cost": "We have great rates! Gaming PCs: $2.50/hr, Workstations: $3.00/hr, Streaming Studio: $8.00/hr, Group Room: $12.00/hr",
+            "hours|open|when": "We're open 24/7! Always ready for you! 🌍",
+            "location|address|where": "📍 We're at 123 Tech Street, Innovation City. Easy to find!",
+            "gaming|pc|game": "🎮 Yes! High-performance gaming PCs with RTX 4090 and ultra-fast internet!",
+            "workstation|design|editing": "💻 Professional workstations with dual monitors and Adobe Creative Suite!",
+            "stream|streaming|content": "🎥 4K streaming studio with professional lighting and audio equipment!",
+            "booking|book|reserve": "📅 Click 'Book Now' or scroll to the booking form to reserve your station!",
+            "internet|wifi|speed": "⚡ 1Gbps fiber optic connection with zero latency!",
+            "help|support|issue": "🛠️ Call us at 07045809909 or email imranabdulrahman1001@gmail.com",
+            "contact|phone|email": "📞 07045809909 | 📧 info@calculusgraphics.com | Open 24/7",
+            "payment|pay|card": "💳 We accept Credit Cards, PayPal, and Stripe with secure SSL encryption!",
+            "default": "That's a great question! Contact us at info@calculusgraphics.com or call 07045809909"
+        };
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatWindow.classList.toggle('active');
+            if (chatWindow.classList.contains('active')) {
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+
+            addMessage(message, 'user');
+            input.value = '';
+
+            setTimeout(() => {
+                const response = generateAIResponse(message);
+                addMessage(response, 'bot');
+            }, 300);
+        }
+
+        function handleChatKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.innerHTML = `<div class="message-content">${escapeHtml(text)}</div>`;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            for (const [key, response] of Object.entries(aiResponses)) {
+                const patterns = key.split('|');
+                for (const pattern of patterns) {
+                    if (message.includes(pattern.trim())) {
+                        return response;
+                    }
+                }
+            }
+            
+            return aiResponses.default;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Booking Form
+        function updatePrice() {
+            const stationSelect = document.getElementById('station');
+            const durationInput = document.getElementById('duration');
+            const totalPriceElement = document.getElementById('totalPrice');
+
+            const selectedOption = stationSelect.options[stationSelect.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+            const duration = parseInt(durationInput.value) || 0;
+            
+            const totalPrice = (price * duration).toFixed(2);
+            totalPriceElement.textContent = '$' + totalPrice;
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const station = document.getElementById('station').value;
+            const duration = document.getElementById('duration').value;
+            const totalPrice = document.getElementById('totalPrice').textContent;
+
+            alert(`✅ Booking Confirmed!\n\nName: ${name}\nEmail: ${email}\nStation: ${station}\nDuration: ${duration} hours\nTotal: ${totalPrice}\n\nConfirmation sent to your email!`);
+            
+            document.querySelector('.booking-form').reset();
+            document.getElementById('totalPrice').textContent = '$0.00';
+        }
+
+        // Set minimum date to today
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            dateInput.min = new Date().toISOString().split('T')[0];
+        });
+    </script>
+</body>
+</html>
